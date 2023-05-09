@@ -102,6 +102,7 @@ render()
 
 function deleteTask(e) {
     e.target.parentNode.remove()
+    delete descendingTasks[e.target.parentNode.lastChild.id]
 }
 
 function addTask() {
