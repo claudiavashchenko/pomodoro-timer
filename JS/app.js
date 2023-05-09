@@ -24,21 +24,29 @@ let tasks = [
 ]
 const descendingTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.priority)
 
-function countDown() {
+function handleClick(button) {
+  countDown(button)
+}
+
+function countDown(button) {
     timerId = setInterval(() => {
         timeLeft--
         timeLeftDisplay.textContent = timeLeft
         sliderFill.style.width = (timeLeft / startCount) * 100 + "%"
         if(timeLeft <= 0) {
             clearInterval(timerId)
+           delete descendingTasks[button.id]
+           button.parentNode.remove()
+           timeLeft = startCount
+           timeLeftDisplay.textContent = timeLeft
         }
     }, 1000)
 }
-countDown()
+
 
 
 function render() {
-    descendingTasks.forEach(task => {
+    descendingTasks.forEach((task, index) => {
         const taskBlock = document.createElement("div")
         taskBlock.classList.add("task-block")
         const deleteElement = document.createElement("p")
@@ -49,6 +57,8 @@ function render() {
         const controller = document.createElement("button")
         controller.classList.add("controller-button")
         controller.textContent = "START"
+        controller.id = index
+        controller.addEventListener("click", () => handleClick(controller))
         title.textContent = task.name
         taskBlock.append(deleteElement, title, controller)
         taskContainer.append(taskBlock)
