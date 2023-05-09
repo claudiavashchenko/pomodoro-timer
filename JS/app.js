@@ -24,6 +24,7 @@ function render() {
         const deleteElement = document.createElement("p")
         deleteElement.classList.add("delete-icon")
         deleteElement.textContent = "☒"
+        deleteElement.addEventListener("click", deleteTask)
         const title = document.createElement("p")
         const controller = document.createElement("button")
         controller.classList.add("controller-button")
@@ -36,3 +37,7 @@ function render() {
 }
 
 render()
+
+function deleteTask(e) {
+    e.target.parentNode.remove()
+}
