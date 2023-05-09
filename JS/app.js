@@ -3,7 +3,7 @@ const submitButton = document.querySelector(".submit-button");
 const timeLeftDisplay = document.querySelector("#time-left");
 const sliderFill = document.querySelector(".fill")
 
-const startCount = 5
+const startCount = 25 * 60
 
 let timeLeft = startCount
 let timerId
@@ -24,6 +24,12 @@ let tasks = [
 ]
 const descendingTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.priority)
 
+function convertToMin(secondsLeft) {
+    const minutes = Math.floor(secondsLeft / 60)
+    const seconds = secondsLeft - minutes * 60
+    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+}
+
 function handleClick(button) {
 
    switch(button.textContent) {
@@ -42,7 +48,7 @@ function handleClick(button) {
            button.classList.remove("active-button")
            clearInterval(timerId)
            timeLeft = startCount
-           timeLeftDisplay.textContent = timeLeft
+           timeLeftDisplay.textContent = convertToMin(timeLeft)
         })
 
         button.textContent = "ACTIVE"
@@ -57,14 +63,14 @@ function handleClick(button) {
 function countDown(button) {
     timerId = setInterval(() => {
         timeLeft--
-        timeLeftDisplay.textContent = timeLeft
+        timeLeftDisplay.textContent = convertToMin(timeLeft)
         sliderFill.style.width = (timeLeft / startCount) * 100 + "%"
         if(timeLeft <= 0) {
             clearInterval(timerId)
            delete descendingTasks[button.id]
            button.parentNode.remove()
            timeLeft = startCount
-           timeLeftDisplay.textContent = timeLeft
+           timeLeftDisplay.textContent = convertToMin(timeLeft)
         }
     }, 1000)
 }
