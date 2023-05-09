@@ -25,7 +25,33 @@ let tasks = [
 const descendingTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.priority)
 
 function handleClick(button) {
-  countDown(button)
+
+   switch(button.textContent) {
+    case "ACTIVE":
+        button.textContent = "PAUSED"
+        clearInterval(timerId)
+        break
+    case "PAUSED":
+        button.textContent = "ACTIVE"
+        countDown(button)
+        break
+    default:
+        const allButtons = document.querySelectorAll(".controller-button")
+        allButtons.forEach(button => {
+           button.textContent = "START"
+           button.classList.remove("active-button")
+           clearInterval(timerId)
+           timeLeft = startCount
+           timeLeftDisplay.textContent = timeLeft
+        })
+
+        button.textContent = "ACTIVE"
+        button.classList.add("active-button")
+        countDown(button)
+        break
+   }
+
+ 
 }
 
 function countDown(button) {
