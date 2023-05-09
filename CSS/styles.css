@@ -57,3 +57,28 @@ body {
     font-size: 20px;
     border-radius: 0 20px 20px 0;
 }
+.sub-text {
+    margin: 4px;
+}
+.task-block {
+    background-color: rgb(41, 80, 96);
+    border-radius: 20px;
+    margin: 10px 0;
+    height: 60px;
+    width: 412px;
+    display: flex;
+}
+.task-block .delete-icon {
+    width: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+.task-block p {
+    width: 242px;
+    font-size: 20px;
+}
+.task-block .controller-button {
+    height: 100%;
+    width: 120px;
+    border: none;
+}
