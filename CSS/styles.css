@@ -67,6 +67,8 @@ body {
     height: 60px;
     width: 412px;
     display: flex;
+    align-items: center;
+    text-align: left;
 }
 .task-block .delete-icon {
     width: 50px;
